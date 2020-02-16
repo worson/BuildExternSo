@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.4.1)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
+
+
+add_library(hello SHARED IMPORTED)
+set_target_properties(hello PROPERTIES IMPORTED_LOCATION
+        ${PROJECT_LIBS_DIR}/${ANDROID_ABI}/libhello.so)
+
+add_library(math_test SHARED math_test.cc)
+target_include_directories(math_test PUBLIC ${hello_INCLUDE})
+TARGET_LINK_LIBRARIES(math_test hello)
